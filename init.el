@@ -1,16 +1,22 @@
 ;;
 ;;
+(require 'package)
+
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+
+(setq package-enable-at-startup nil)
+(package-initialize)
+
+(use-package better-defaults
+  :ensure t)
 
 ;; Hide menus, toolbars, scrollbars, splashscreens
 ;;(menu-bar-mode -1)
 ;; (tool-bar-mode -1)
 ;;(scroll-bar-mode -1)
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
 
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
@@ -40,22 +46,6 @@
 ;; You can change the path here
 ;;(add-to-list 'load-path "~/.emacs.d/")
 ;; (load-library "packagefilename")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-archives
-   (quote
-    (("marmalade" . "http://marmalade-repo.org/packages/")
-     ("melpa" . "http://melpa.org/packages/"))))
- '(package-selected-packages (quote (better-defaults))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 
 ;; Temporarily show line numbers when jumping to line
@@ -134,3 +124,17 @@ Including indent-buffer, which should not be called automatically on save."
   (indent-region (point-min) (point-max)))
 
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (use-package helm magit better-defaults))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
