@@ -1,0 +1,29 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/dave/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/dave/.emacs.d/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "init.el"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/dave/.emacs.d/" (23168 56181 169353 413000) "backups/" ".git/" "elpa/" "README.md" "init.el" "auto-save-list/" "ido.last" "../" "./")
+
+ ("/Users/dave/" (23168 54817 121560 64000) ".zlogout" "src/" "Seafile/" "Local Docs/" ".zlogin" ".aliases" "e/" ".viminfo" ".emacs.d.pre-prelude.tar" ".bash_history" ".erc/" "release.notes.txt" ".python-eggs/" "trump" ".gitconfig" ".zcompdump.zwc" ".cache/" "tmp/" "Downloads/" ".plex/" ".Xauthority" ".gem/" ".bash_profile" "._PrintopiaImport" ".pia_manager/" "sauce" "Documents/" ".npm/" "Brewfile" ".zprezto/" ".zcompdump" ".Trash/" "Dropbox/" ".parallel/" ".profile" "Applications/" "Movies/" ".ssh/" "emacs.d/" ".cshrc" ".ansible/" ".zshenv" ".dropbox/" "Public/" ".perlbrew/" ".emacs.d.old/" "Google Drive/" ".DDPreview/" ".ccnet/" ".gqview/" ".cups/" ".gitignore_global" ".android/" "rec" ".emacs.d/" "TV/" ".oracle_jre_usage/" ".lesshst" ".electron/" "Library/" ".zhistory" "hcod_checker" "Desktop/" ".plexht/" ".cpan/" "tickler" ".gitk" "etc/" ".rnd" ".nvm/" ".zprofile" ".atom/" "Pictures/" "Creative Cloud Files/" ".local/" "ee/" "vagrant_data/" ".zshrc" "checker" ".cpanm/" "sssplan" ".bashrc" ".subversion/" ".netrc" ".op/" ".vagrant.d/" ".rbenv/" "bin/" ".wget-hsts" ".hgignore_global" ".CFUserTextEncoding" "VirtualBox VMs/" ".scm_breeze/" ".serverauth.35479" "dotfiles/" ".electrum/" ".vimperatorrc" "Torrents/" ".gnupg/" ".DS_Store" ".pia_manager_crash.log" "vagrant_centos7/" "emacs.d-prelude/" "perl5/" ".gnupg_pre_2.1/" ".heroku/" ".cut.cut.cut." "Music/" ".macports/" ".config/" ".zpreztorc" "../" "./")
+
+ ("/Users/dave/Dropbox/" (23168 54274 910420 448000) "1Password/" "pm_pics/" "trump/" "Apps/" "00-InsuranceIDCard.pdf" "license.bettertouchtool" "zsh/" ".dropbox.cache/" "Alfred.alfredpreferences/" "text/" "Hack-v3.000-ttf.zip" "Brewfile" "The_Consumer.pdf" "Dragand_Mac_1.0.1.zip" "jason/" "Bartender 3.zip" "PSTECLevel1/" ".dropbox" "Audio/" "DFACIANE.id" "t/" "gofobo.com" "Guitar/" "Road Trip Data/" "trezor_homescreen.png" "GPG_Suite-2017.3.dmg" "Jackie 2017/" "bbq/" "Vagrant/" "HVDzXea.png" "Rocket.dmg" "Investing/" "Icon
+" "memes/" ".DS_Store" "tickler.txt" "00Fuji/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
