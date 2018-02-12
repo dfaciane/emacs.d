@@ -47,3 +47,36 @@ flycheck_*.el
 
 ido.last
 
+auto-save-list
+backups
+*~
+.places
+session.*
+tramp
+elpa
+swank
+emms
+site-lisp/adventur-mode
+*.elc
+.DS_Store
+.yas-compiled-snippets.el
+.cask
+/url/
+/var/
+/.sx/
+/ensime/
+/history
+/ido.last
+/recentf
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
