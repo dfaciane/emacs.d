@@ -32,15 +32,6 @@
 (use-package magit :ensure t)
 (use-package helm :ensure t)
 
-(use-package spacemacs-theme
-  :defer t
-  :init
-  (progn
-    (load-theme 'spacemacs-dark t)
-    ;;(load-theme 'wheatgrass t)
-    ;; Exploits a bug to get a better modeline
-    ))
-
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
 
