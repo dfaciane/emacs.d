@@ -146,7 +146,10 @@ Including indent-buffer, which should not be called automatically on save."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("599f1561d84229e02807c952919cd9b0fbaa97ace123851df84806b067666332" default))))
+    ("bcc6775934c9adf5f3bd1f428326ce0dcd34d743a92df48c128e6438b815b44f" "599f1561d84229e02807c952919cd9b0fbaa97ace123851df84806b067666332" default)))
+ '(package-selected-packages
+   (quote
+    (hc-zenburn-theme zenburn-theme use-package solarized-theme magit helm diminish better-defaults))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
