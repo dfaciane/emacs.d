@@ -1,5 +1,4 @@
-;;
-;;
+;; init.el
 ;;
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -44,6 +43,31 @@
 (setq ido-enable-flex-matching t)
 ;; IF you want Ido mode to work with C-x C-f (find-files) then add this as well:
 (setq ido-everywhere t)
+
+;; cc-mode
+(require 'cc-mode)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; c-mode indent
+;;(setq c-default-style "linux"
+;;      c-basic-offset 4)
+
+;; c-mode indent
+(defun my-c-mode-common-hook ()
+ ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
+ (c-set-offset 'substatement-open 0)
+ ;; other customizations can go here
+
+ (setq c++-tab-always-indent t)
+ (setq c-basic-offset 4)                  ;; Default is 2
+ (setq c-indent-level 4)                  ;; Default is 2
+
+ (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
+ (setq tab-width 4)
+ (setq indent-tabs-mode t)  ; use spaces only if nil
+ )
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; auto-indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -133,26 +157,10 @@ Including indent-buffer, which should not be called automatically on save."
 
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
-;;
-;; Custom stuff goes here
-;;
-;;(load "~/.emacs.d/custom/init-90-zenburn.el")
+;; (defvar hc-zenburn-override-colors-alist
+;;   '(("hc-zenburn-bg+05" . "#282828")
+;;     ("hc-zenburn-bg+1"  . "#2F2F2F")
+;;     ("hc-zenburn-bg+2"  . "#3F3F3F")
+;;     ("hc-zenburn-bg+3"  . "#4F4F4F")))
 
-(use-package hc-zenburn-theme
-  :ensure t
-  :config
-  (load-theme 'hc-zenburn) )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("bcc6775934c9adf5f3bd1f428326ce0dcd34d743a92df48c128e6438b815b44f" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(load-theme 'hc-zenburn t)
