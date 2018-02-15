@@ -54,18 +54,18 @@
 
 ;; c-mode indent
 (defun my-c-mode-common-hook ()
- ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
- (c-set-offset 'substatement-open 0)
- ;; other customizations can go here
+  ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
+  (c-set-offset 'substatement-open 0)
+  ;; other customizations can go here
 
- (setq c++-tab-always-indent t)
- (setq c-basic-offset 4)                  ;; Default is 2
- (setq c-indent-level 4)                  ;; Default is 2
+  (setq c++-tab-always-indent t)
+  (setq c-basic-offset 4)                  ;; Default is 2
+  (setq c-indent-level 4)                  ;; Default is 2
 
- (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
- (setq tab-width 4)
- (setq indent-tabs-mode t)  ; use spaces only if nil
- )
+  (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
+  (setq tab-width 4)
+  (setq indent-tabs-mode t)  ; use spaces only if nil
+  )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
@@ -157,10 +157,49 @@ Including indent-buffer, which should not be called automatically on save."
 
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
+
+;;  Steve Yegge from "effective emacs"
+;;
+;;
+(use-package region-bindings-mode :ensure t)
+(region-bindings-mode-enable)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(define-key region-bindings-mode-map (kbd "C-w") 'kill-region)
+
+;;  Another way to get M-x
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+
+;; type "M-x qrr" to invoke query-replace-regexp
+(defalias 'qrr 'query-replace-regexp)
+
+;; repeat last macro
+(global-set-key [f5] 'call-last-kbd-macro)
+
+
+;; Theme du jour
+
 ;; (defvar hc-zenburn-override-colors-alist
 ;;   '(("hc-zenburn-bg+05" . "#282828")
 ;;     ("hc-zenburn-bg+1"  . "#2F2F2F")
 ;;     ("hc-zenburn-bg+2"  . "#3F3F3F")
 ;;     ("hc-zenburn-bg+3"  . "#4F4F4F")))
 
+
 (load-theme 'hc-zenburn t)
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (region-bindings-mode zenburn-theme use-package magit helm hc-zenburn-theme color-theme better-defaults))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
