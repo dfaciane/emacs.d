@@ -18,14 +18,9 @@
 (eval-when-compile
   (require 'use-package))
 
-;; (use-package whitespace
-;;   :bind (("C-c T w" . whitespace-mode))
-;;   :init
-;;   (dolist (hook '(prog-mode-hook text-mode-hooki
-;;                   conf-mode-hook))
-;;     (add-hook hook #'whitespace-mode))
-;;   :config (setq whitespace-line-column nil)
-;;   :diminish whitespace-mode)
+;;(use-package which-key
+;;  :config (which-key-mode)
+;;  :diminish which-key-mode)
 
 (use-package bind-key :ensure t)
 (use-package better-defaults :ensure t)
@@ -75,40 +70,38 @@
     (linum-mode -1)))
 
 ;; full screen magit-status
-
-;; Magit stuff
 (global-set-key (kbd "C-x g s") 'magit-status)
+;; Magit stuff
+;; (defun magit-quit-session ()
+;;   "Restores the previous window configuration and kills the magit buffer"
+;;   (interactive)
+;;   (kill-buffer)
+;;   (jump-to-register :magit-fullscreen))
 
-(defun magit-quit-session ()
-  "Restores the previous window configuration and kills the magit buffer"
-  (interactive)
-  (kill-buffer)
-  (jump-to-register :magit-fullscreen))
+;; (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
 
-(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+;; (defun magit-toggle-whitespace ()
+;;   (interactive)
+;;   (if (member "-w" magit-diff-options)
+;;       (magit-dont-ignore-whitespace)
+;;     (magit-ignore-whitespace)))
 
-(defun magit-toggle-whitespace ()
-  (interactive)
-  (if (member "-w" magit-diff-options)
-      (magit-dont-ignore-whitespace)
-    (magit-ignore-whitespace)))
+;; (defun magit-ignore-whitespace ()
+;;   (interactive)
+;;   (add-to-list 'magit-diff-options "-w")
+;;   (magit-refresh))
 
-(defun magit-ignore-whitespace ()
-  (interactive)
-  (add-to-list 'magit-diff-options "-w")
-  (magit-refresh))
+;; (defun magit-dont-ignore-whitespace ()
+;;   (interactive)
+;;   (setq magit-diff-options (remove "-w" magit-diff-options))
+;;   (magit-refresh))
 
-(defun magit-dont-ignore-whitespace ()
-  (interactive)
-  (setq magit-diff-options (remove "-w" magit-diff-options))
-  (magit-refresh))
+;; (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
 
-(define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
-
-(defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
-  ad-do-it
-  (delete-other-windows))
+;; (defadvice magit-status (around magit-fullscreen activate)
+;;   (window-configuration-to-register :magit-fullscreen)
+;;   ad-do-it
+;;   (delete-other-windows))
 
 
 ;; Auto refresh buffers
@@ -139,3 +132,27 @@ Including indent-buffer, which should not be called automatically on save."
   (indent-region (point-min) (point-max)))
 
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
+
+;;
+;; Custom stuff goes here
+;;
+;;(load "~/.emacs.d/custom/init-90-zenburn.el")
+
+(use-package hc-zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'hc-zenburn) )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("bcc6775934c9adf5f3bd1f428326ce0dcd34d743a92df48c128e6438b815b44f" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
