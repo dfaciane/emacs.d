@@ -28,10 +28,6 @@
 (global-unset-key (kbd "C-x C-c"))
 (global-unset-key (kbd "C-x C-z"))
 
-;; better window management
-(windmove-default-keybindings)
-(winner-mode 1)
-
 (use-package magit :ensure t)
 (use-package helm :ensure t)
 
@@ -185,7 +181,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;; repeat last macro
 (global-set-key [f5] 'call-last-kbd-macro)
 
-;; window management
+;; better window management
 (windmove-default-keybindings)
 (winner-mode 1)
 
