@@ -23,6 +23,15 @@
 
 (use-package bind-key :ensure t)
 (use-package better-defaults :ensure t)
+
+;; running emacs in daemon mode so don't need these
+(global-unset-key (kbd "C-x C-c"))
+(global-unset-key (kbd "C-x C-z"))
+
+;; better window management
+(windmove-default-keybindings)
+(winner-mode 1)
+
 (use-package magit :ensure t)
 (use-package helm :ensure t)
 
@@ -188,18 +197,11 @@ Including indent-buffer, which should not be called automatically on save."
 
 (load-theme 'hc-zenburn t)
 
+;; custom-set-variables go here
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (region-bindings-mode zenburn-theme use-package magit helm hc-zenburn-theme color-theme better-defaults))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq emacs-init-file load-file-name)
+(setq emacs-config-dir
+      (file-name-directory emacs-init-file))
+
+(setq custom-file (expand-file-name "customizations.el" emacs-config-dir))
+(load custom-file)
