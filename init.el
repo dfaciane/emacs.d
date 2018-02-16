@@ -176,6 +176,10 @@ Including indent-buffer, which should not be called automatically on save."
 ;; repeat last macro
 (global-set-key [f5] 'call-last-kbd-macro)
 
+;; window management
+(windmove-default-keybindings)
+(winner-mode 1)
+
 
 ;; Theme du jour
 
