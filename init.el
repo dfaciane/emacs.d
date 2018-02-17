@@ -9,27 +9,99 @@
 
 (package-initialize)
 
+;; Are we on a mac?
+(setq is-mac (equal system-type 'darwin))
+
+;; load path
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+;;(add-to-list 'load-path settings-dir)
+;;(add-to-list 'load-path site-lisp-dir)
+
+;; Keep emacs Custom-settings in separate file
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file t)
+
+;; backups
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(setq use-package-verbose t)
+(setq use-package-always-ensure t)
 
 (eval-when-compile
   (require 'use-package))
 
-;;(use-package which-key
-;;  :config (which-key-mode)
-;;  :diminish which-key-mode)
+(use-package which-key
+  :config (which-key-mode)
+  :diminish which-key-mode)
 
-(use-package bind-key :ensure t)
-(use-package better-defaults :ensure t)
+(use-package bind-key)
 
-;; running emacs in daemon mode so don't need these
-(global-unset-key (kbd "C-x C-c"))
-(global-unset-key (kbd "C-x C-z"))
+;;
+;; set up some reasonable defaults
+;;
+(use-package better-defaults)
 
-(use-package magit :ensure t)
-(use-package helm :ensure t)
+
+;; fix up some other annoyances
+;; Change "yes or no" to "y or n"
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Setup environment variables from the user's shell.
+  (when is-mac
+  (use-package exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
+;; more space in minibuffer
+;; (use-package miniedit
+;;   :commands minibuffer-edit
+;;   :init (miniedit-install))
+
+(use-package dash)
+
+;; better window management with winner and windmove
+
+(windmove-default-keybindings)
+(winner-mode 1)
+
+;;
+;; yasnippets
+;;
+
+(use-package yasnippet)
+
+
+;; collections
+(use-package yasnippet-snippets)
+
+
+;;(yas-reload-all)
+;;(add-hook 'prog-mode-hook #'yas-minor-mode)
+
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                 ;; personal snippets
+;;        "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+;;        "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+        ))
+
+;;(setq yas-snippet-dirs
+;;      '("~/.emacs.d/snippets"                 ;; personal snippets
+;;        "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+;;       "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+;;        ))
+
+(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
+
+;;
+;; Stuff cribbed from Magnars
+;;
 
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
@@ -44,6 +116,8 @@
 ;; M-x customize-group RET linum RET
 
 ;; IDO Mode
+(use-package ido)
+
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
 ;; IF you want Ido mode to work with C-x C-f (find-files) then add this as well:
@@ -77,6 +151,22 @@
 ;; auto-indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+
+;; Default setup of smartparens
+(use-package smartparens)
+(require 'smartparens-config)
+(add-hook 'cc-mode-hook #'smartparens-mode)
+
+
+;; Browse kill ring
+(use-package browse-kill-ring)
+(setq browse-kill-ring-quit-action 'save-and-restore)
+
+;; Smart M-x is smart
+(use-package smex)
+(smex-initialize)
+
+
 ;;customize the Font and Background
 ;; To customize the default font and color, type M-x customize-face RET default RET.
 ;; To customize the default syntax highlighter (also called “font locking”) typeM-x customize-group RET font-lock-faces RET.
@@ -97,6 +187,11 @@
         (linum-mode 1)
         (goto-line (read-number "Goto line: ")))
     (linum-mode -1)))
+
+;;
+;; magit stuff
+;;
+(use-package magit)
 
 ;; full screen magit-status
 (global-set-key (kbd "C-x g s") 'magit-status)
@@ -163,10 +258,14 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
 
+;; running emacs in daemon mode so don't need these
+;;(global-unset-key (kbd "C-x C-c"))
+;;(global-unset-key (kbd "C-x C-z"))
+
 ;;  Steve Yegge from "effective emacs"
 ;;
 ;;
-(use-package region-bindings-mode :ensure t)
+(use-package region-bindings-mode)
 (region-bindings-mode-enable)
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (define-key region-bindings-mode-map (kbd "C-w") 'kill-region)
@@ -181,10 +280,6 @@ Including indent-buffer, which should not be called automatically on save."
 ;; repeat last macro
 (global-set-key [f5] 'call-last-kbd-macro)
 
-;; better window management
-(windmove-default-keybindings)
-(winner-mode 1)
-
 
 ;; Theme du jour
 
@@ -197,11 +292,12 @@ Including indent-buffer, which should not be called automatically on save."
 
 (load-theme 'hc-zenburn t)
 
-;; custom-set-variables go here
+;; Emacs server
+(use-package server)
+(unless (server-running-p)
+  (server-start))
 
-(setq emacs-init-file load-file-name)
-(setq emacs-config-dir
-      (file-name-directory emacs-init-file))
-
-(setq custom-file (expand-file-name "customizations.el" emacs-config-dir))
-(load custom-file)
+;; Run at full power please
+;;(put 'downcase-region 'disabled nil)
+;;(put 'upcase-region 'disabled nil)
+;;(put 'narrow-to-region 'disabled nil)
