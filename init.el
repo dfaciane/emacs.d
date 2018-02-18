@@ -341,12 +341,6 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 
-;; type "M-x qrr" to invoke query-replace-regexp
-(defalias 'qrr 'query-replace-regexp)
-
-;; repeat last macro
-(global-set-key [f5] 'call-last-kbd-macro)
-
 ;; Expand region (increases selected region by semantic units)
 (use-package expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -382,6 +376,22 @@ Including indent-buffer, which should not be called automatically on save."
 ;; dired stuff
 (use-package dired-details)
 (setq-default dired-listing-switches "-alhv")
+
+;; Set up some key chord bindings
+;;
+(use-package key-chord)
+(key-chord-mode 1)
+;;
+;; Max time delay between two key presses to be considered a key chord
+(setq key-chord-two-keys-delay 0.15) ; default 0.1
+;;
+;; Max time delay between two presses of the same key to be considered a key chord.
+;; Should normally be a little longer than `key-chord-two-keys-delay'.
+(setq key-chord-one-key-delay 0.2) ; default 0.2
+;;
+(key-chord-define-global ";r" 'query-replace-string)
+(key-chord-define-global ";m" 'call-last-kbd-macro)
+(key-chord-define-global ";g" 'magit-status)
 
 
 ;; Theme
