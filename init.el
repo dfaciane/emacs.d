@@ -77,18 +77,11 @@
 
 (use-package yasnippet)
 
-
-;; collections
-(use-package yasnippet-snippets)
-
-
 ;;(yas-reload-all)
 ;;(add-hook 'prog-mode-hook #'yas-minor-mode)
 
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"                 ;; personal snippets
-;;        "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-;;        "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
         ))
 
 ;;(setq yas-snippet-dirs
@@ -96,6 +89,9 @@
 ;;        "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
 ;;       "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
 ;;        ))
+
+;; yasnippet collections
+(use-package yasnippet-snippets)
 
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
 
@@ -115,13 +111,55 @@
 ;; Now you can customize it further with:
 ;; M-x customize-group RET linum RET
 
-;; IDO Mode
-(use-package ido)
 
-(ido-mode 1)
-(setq ido-enable-flex-matching t)
-;; IF you want Ido mode to work with C-x C-f (find-files) then add this as well:
-(setq ido-everywhere t)
+;;
+;; IDO vs IVY vs HELM
+;;
+
+;; IDO Mode
+;;(use-package ido)
+;;(ido-mode 1)
+;;(ido-everywhere 1)
+;;(setq ido-enable-flex-matching t)
+
+;; Smart M-x is smart
+(use-package smex)
+(smex-initialize)
+;; Smart M-x
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+(use-package auto-complete)
+(ac-config-default)
+
+
+;; Completion that uses many different methods to find options.
+(global-set-key (kbd "C-.") 'hippie-expand-no-case-fold)
+(global-set-key (kbd "C-:") 'hippie-expand-lines)
+(global-set-key (kbd "C-,") 'completion-at-point)
+
+
+;;(use-package ivy)
+;;(ivy-mode 1)
+;;(setq ivy-use-virtual-buffers t)
+;;(setq enable-recursive-minibuffers t)
+;; (global-set-key "\C-s" 'swiper)
+;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
+;; (global-set-key (kbd "<f6>") 'ivy-resume)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
+;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;; (global-set-key (kbd "C-c g") 'counsel-git)
+;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
+;; (global-set-key (kbd "C-c k") 'counsel-ag)
+;; (global-set-key (kbd "C-x l") 'counsel-locate)
+;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; cc-mode
 (require 'cc-mode)
@@ -151,21 +189,36 @@
 ;; auto-indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+;; smart line mode
+;;(use-package smart-mode-line)
+;;(setq sml/theme 'dark)
+;;(setq sml/theme 'light)
+;;(setq sml/theme 'respectful)
+;;(setq sml/no-confirm-load-theme t)
+;;(sml/setup)
+
 
 ;; Default setup of smartparens
 (use-package smartparens)
 (require 'smartparens-config)
 (add-hook 'cc-mode-hook #'smartparens-mode)
 
+;; undo-tree: turn on everywhere
+;;(use-package undo-tree)
+;;(global-undo-tree-mode 1)
+;; make ctrl-z undo
+;;(global-set-key (kbd "C-z") 'undo)
+;; make ctrl-Z redo
+;;(defalias 'redo 'undo-tree-redo)
+;;(global-set-key (kbd "C-S-z") 'redo)
 
 ;; Browse kill ring
 (use-package browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-;; Smart M-x is smart
-(use-package smex)
-(smex-initialize)
 
+(require 'misc)
+(global-set-key (kbd "s-.") 'copy-from-above-command)
 
 ;;customize the Font and Background
 ;; To customize the default font and color, type M-x customize-face RET default RET.
@@ -270,6 +323,7 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (define-key region-bindings-mode-map (kbd "C-w") 'kill-region)
 
+
 ;;  Another way to get M-x
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
@@ -280,17 +334,51 @@ Including indent-buffer, which should not be called automatically on save."
 ;; repeat last macro
 (global-set-key [f5] 'call-last-kbd-macro)
 
+;; Expand region (increases selected region by semantic units)
+(use-package expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
-;; Theme du jour
+;;
+;; ace jump mode major function
+;;
+(use-package ace-jump-mode)
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;;
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+;;
+;;If you use viper mode :
+;;(define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
+;;If you use evil
+;;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
+;; dired stuff
+(use-package dired-details)
+(setq-default dired-listing-switches "-alhv")
+
+
+;; Theme
 ;; (defvar hc-zenburn-override-colors-alist
 ;;   '(("hc-zenburn-bg+05" . "#282828")
 ;;     ("hc-zenburn-bg+1"  . "#2F2F2F")
 ;;     ("hc-zenburn-bg+2"  . "#3F3F3F")
 ;;     ("hc-zenburn-bg+3"  . "#4F4F4F")))
-
-
 (load-theme 'hc-zenburn t)
+
 
 ;; Emacs server
 (use-package server)
