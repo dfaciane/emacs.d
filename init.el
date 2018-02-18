@@ -66,6 +66,9 @@
 
 (use-package dash)
 
+(use-package flycheck)
+(global-flycheck-mode)
+
 ;; better window management with winner and windmove
 
 (windmove-default-keybindings)
@@ -138,6 +141,7 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is the legacy M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (use-package auto-complete)
