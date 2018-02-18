@@ -1,4 +1,3 @@
-;;
 ;; init.el
 ;;
 (require 'package)
@@ -12,6 +11,7 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
+
 ;; load path
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 ;;(add-to-list 'load-path settings-dir)
@@ -44,6 +44,19 @@
 
 (use-package bind-key)
 
+(use-package key-chord)
+](use-package use-package-chords)
+(key-chord-mode 1)
+;;
+;; Max time delay between two key presses to be considered a key chord
+(setq key-chord-two-keys-delay 0.15) ; default 0.1
+;;
+;; Max time delay between two presses of the same key to be considered a key chord.
+;; Should normally be a little longer than `key-chord-two-keys-delay'.
+(setq key-chord-one-key-delay 0.2) ; default 0.2
+
+
+
 ;;
 ;; set up some reasonable defaults
 ;;
@@ -55,7 +68,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Setup environment variables from the user's shell.
-  (when is-mac
+(when is-mac
   (use-package exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
@@ -347,31 +360,24 @@ Including indent-buffer, which should not be called automatically on save."
 ;;If you use evil
 ;;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
+(key-chord-define-global "jw" 'ace-jump-word-mode)
+(key-chord-define-global "jc" 'ace-jump-char-mode)
+(key-chord-define-global "jl" 'ace-jump-line-mode)
+(key-chord-define-global "JJ" 'ace-jump-mode-pop-mark)
+
+(use-package ace-jump-zap
+  :chords ("jz" . ace-jump-zap-up-to-char))
+
 ;; dired stuff
 (use-package dired-details)
 (setq-default dired-listing-switches "-alhv")
 
-;; Set up some key chord bindings
+;; Set up some more key chord bindings
 ;;
-(use-package key-chord)
-(key-chord-mode 1)
-;;
-;; Max time delay between two key presses to be considered a key chord
-(setq key-chord-two-keys-delay 0.15) ; default 0.1
-;;
-;; Max time delay between two presses of the same key to be considered a key chord.
-;; Should normally be a little longer than `key-chord-two-keys-delay'.
-(setq key-chord-one-key-delay 0.2) ; default 0.2
 ;;
 (key-chord-define-global ";r" 'query-replace-string)
 (key-chord-define-global ";m" 'call-last-kbd-macro)
 (key-chord-define-global ";g" 'magit-status)
-;;
-(key-chord-define-global "jj" 'ace-jump-word-mode)
-(key-chord-define-global "kk" 'ace-jump-char-mode)
-(key-chord-define-global "ll" 'ace-jump-line-mode)
-(key-chord-define-global "JJ" 'ace-jump-mode-pop-mark)
-;;
 (key-chord-define-global "xx" 'execute-extended-command)
 (key-chord-define-global "yy" 'browse-kill-ring)
 
