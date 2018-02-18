@@ -122,6 +122,11 @@
 (ido-everywhere 1)
 (setq ido-enable-flex-matching t)
 
+(use-package ido-vertical-mode)
+(ido-vertical-mode 1)
+;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
+
 ;; Smart M-x is smart
 (use-package smex)
 (smex-initialize)
