@@ -111,23 +111,19 @@
 ;; Now you can customize it further with:
 ;; M-x customize-group RET linum RET
 
-
-;;
-;; IDO vs IVY vs HELM
-;;
-
 ;; IDO Mode
 (use-package ido)
 (ido-mode 1)
 (ido-everywhere 1)
 (setq ido-enable-flex-matching t)
+(use-package flx-ido)
+(flx-ido-mode 1)
 
 ;;(use-package ido-vertical-mode)
 ;;(ido-vertical-mode 1)
 ;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
 (use-package ido-grid-mode)
 (ido-grid-mode 1)
-
 
 ;; Smart M-x is smart
 (use-package smex)
@@ -329,7 +325,6 @@ Including indent-buffer, which should not be called automatically on save."
 (region-bindings-mode-enable)
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (define-key region-bindings-mode-map (kbd "C-w") 'kill-region)
-
 
 ;;  Another way to get M-x
 (global-set-key "\C-x\C-m" 'execute-extended-command)
