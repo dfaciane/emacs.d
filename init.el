@@ -392,7 +392,14 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global ";r" 'query-replace-string)
 (key-chord-define-global ";m" 'call-last-kbd-macro)
 (key-chord-define-global ";g" 'magit-status)
-
+;;
+(key-chord-define-global "jj" 'ace-jump-word-mode)
+(key-chord-define-global "jk" 'ace-jump-char-mode)
+(key-chord-define-global "jl" 'ace-jump-line-mode)
+(key-chord-define-global "JJ" 'ace-jump-mode-pop-mark)
+;;
+(key-chord-define-global "xx" 'execute-extended-command)
+(key-chord-define-global "yy" 'browse-kill-ring)
 
 ;; Theme
 ;; (defvar hc-zenburn-override-colors-alist
