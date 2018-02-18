@@ -1,3 +1,4 @@
+;;
 ;; init.el
 ;;
 (require 'package)
@@ -11,7 +12,6 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
-
 ;; load path
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 ;;(add-to-list 'load-path settings-dir)
@@ -147,33 +147,10 @@
 (use-package auto-complete)
 (ac-config-default)
 
-
 ;; Completion that uses many different methods to find options.
 (global-set-key (kbd "C-.") 'hippie-expand-no-case-fold)
 (global-set-key (kbd "C-:") 'hippie-expand-lines)
 (global-set-key (kbd "C-,") 'completion-at-point)
-
-
-;;(use-package ivy)
-;;(ivy-mode 1)
-;;(setq ivy-use-virtual-buffers t)
-;;(setq enable-recursive-minibuffers t)
-;; (global-set-key "\C-s" 'swiper)
-;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
-;; (global-set-key (kbd "<f6>") 'ivy-resume)
-;; (global-set-key (kbd "M-x") 'counsel-M-x)
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
-;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-;; (global-set-key (kbd "C-c g") 'counsel-git)
-;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; (global-set-key (kbd "C-c k") 'counsel-ag)
-;; (global-set-key (kbd "C-x l") 'counsel-locate)
-;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; cc-mode
 (require 'cc-mode)
@@ -211,7 +188,6 @@
 ;;(setq sml/no-confirm-load-theme t)
 ;;(sml/setup)
 
-
 ;; Default setup of smartparens
 (use-package smartparens)
 (require 'smartparens-config)
@@ -230,7 +206,6 @@
 (use-package browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-
 (require 'misc)
 (global-set-key (kbd "s-.") 'copy-from-above-command)
 
@@ -241,7 +216,6 @@
 ;; You can change the path here
 ;;(add-to-list 'load-path "~/.emacs.d/")
 ;; (load-library "packagefilename")
-
 
 ;; Temporarily show line numbers when jumping to line
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
@@ -394,8 +368,8 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global ";g" 'magit-status)
 ;;
 (key-chord-define-global "jj" 'ace-jump-word-mode)
-(key-chord-define-global "jk" 'ace-jump-char-mode)
-(key-chord-define-global "jl" 'ace-jump-line-mode)
+(key-chord-define-global "kk" 'ace-jump-char-mode)
+(key-chord-define-global "ll" 'ace-jump-line-mode)
 (key-chord-define-global "JJ" 'ace-jump-mode-pop-mark)
 ;;
 (key-chord-define-global "xx" 'execute-extended-command)
