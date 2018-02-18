@@ -113,22 +113,29 @@
 
 ;; IDO Mode
 (use-package ido)
-(ido-mode 1)
-(ido-everywhere 1)
+(setq
+ ido-create-new-buffer    'always
+ ido-enable-flex-matching t
+ ido-everywhere           t)
+(ido-mode 1) ; ido for switch-buffer and find-file
+
+(use-package ido-completing-read+)
+(ido-ubiquitous-mode 1)
 (setq ido-enable-flex-matching t)
+
 (use-package flx-ido)
 (flx-ido-mode 1)
 
 ;;(use-package ido-vertical-mode)
 ;;(ido-vertical-mode 1)
 ;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+;; prefer grid mode for now
 (use-package ido-grid-mode)
 (ido-grid-mode 1)
 
 ;; Smart M-x is smart
 (use-package smex)
 (smex-initialize)
-;; Smart M-x
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
