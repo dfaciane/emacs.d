@@ -117,10 +117,10 @@
 ;;
 
 ;; IDO Mode
-;;(use-package ido)
-;;(ido-mode 1)
-;;(ido-everywhere 1)
-;;(setq ido-enable-flex-matching t)
+(use-package ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(setq ido-enable-flex-matching t)
 
 ;; Smart M-x is smart
 (use-package smex)
