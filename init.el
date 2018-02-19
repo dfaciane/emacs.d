@@ -55,13 +55,10 @@
 ;; Should normally be a little longer than `key-chord-two-keys-delay'.
 (setq key-chord-one-key-delay 0.2) ; default 0.2
 
-
-
 ;;
 ;; set up some reasonable defaults
 ;;
 (use-package better-defaults)
-
 
 ;; fix up some other annoyances
 ;; Change "yes or no" to "y or n"
@@ -117,15 +114,6 @@
 
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
-
-;; line number mode
-;; M-x linum-mode.
-;; To enable it globally for all buffers run M-x global-linum-mode.
-;; To enable it globally and permanently add this to your .emacs file:
-;; (global-linum-mode 1)
-;;
-;; Now you can customize it further with:
-;; M-x customize-group RET linum RET
 
 ;; IDO Mode
 (use-package ido)
@@ -207,8 +195,8 @@
 (add-hook 'cc-mode-hook #'smartparens-mode)
 
 ;; undo-tree: turn on everywhere
-;;(use-package undo-tree)
-;;(global-undo-tree-mode 1)
+(use-package undo-tree)
+(global-undo-tree-mode 1)
 ;; make ctrl-z undo
 ;;(global-set-key (kbd "C-z") 'undo)
 ;; make ctrl-Z redo
@@ -221,14 +209,6 @@
 
 (require 'misc)
 (global-set-key (kbd "s-.") 'copy-from-above-command)
-
-;;customize the Font and Background
-;; To customize the default font and color, type M-x customize-face RET default RET.
-;; To customize the default syntax highlighter (also called “font locking”) typeM-x customize-group RET font-lock-faces RET.
-
-;; You can change the path here
-;;(add-to-list 'load-path "~/.emacs.d/")
-;; (load-library "packagefilename")
 
 ;; Temporarily show line numbers when jumping to line
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
@@ -250,37 +230,36 @@
 ;; full screen magit-status
 (global-set-key (kbd "C-x g s") 'magit-status)
 ;; Magit stuff
-;; (defun magit-quit-session ()
-;;   "Restores the previous window configuration and kills the magit buffer"
-;;   (interactive)
-;;   (kill-buffer)
-;;   (jump-to-register :magit-fullscreen))
+(defun magit-quit-session ()
+  "Restores the previous window configuration and kills the magit buffer"
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
 
-;; (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
 
-;; (defun magit-toggle-whitespace ()
-;;   (interactive)
-;;   (if (member "-w" magit-diff-options)
-;;       (magit-dont-ignore-whitespace)
-;;     (magit-ignore-whitespace)))
+(defun magit-toggle-whitespace ()
+  (interactive)
+  (if (member "-w" magit-diff-options)
+      (magit-dont-ignore-whitespace)
+    (magit-ignore-whitespace)))
 
-;; (defun magit-ignore-whitespace ()
-;;   (interactive)
-;;   (add-to-list 'magit-diff-options "-w")
-;;   (magit-refresh))
+(defun magit-ignore-whitespace ()
+  (interactive)
+  (add-to-list 'magit-diff-options "-w")
+  (magit-refresh))
 
-;; (defun magit-dont-ignore-whitespace ()
-;;   (interactive)
-;;   (setq magit-diff-options (remove "-w" magit-diff-options))
-;;   (magit-refresh))
+(defun magit-dont-ignore-whitespace ()
+  (interactive)
+  (setq magit-diff-options (remove "-w" magit-diff-options))
+  (magit-refresh))
 
-;; (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
+(define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
 
-;; (defadvice magit-status (around magit-fullscreen activate)
-;;   (window-configuration-to-register :magit-fullscreen)
-;;   ad-do-it
-;;   (delete-other-windows))
-
+(defadvice magit-status (around magit-fullscreen activate)
+  (window-configuration-to-register :magit-fullscreen)
+  ad-do-it
+  (delete-other-windows))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -310,7 +289,6 @@ Including indent-buffer, which should not be called automatically on save."
   (indent-region (point-min) (point-max)))
 
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
-
 
 ;; running emacs in daemon mode so don't need these
 ;;(global-unset-key (kbd "C-x C-c"))
@@ -389,6 +367,18 @@ Including indent-buffer, which should not be called automatically on save."
 ;;     ("hc-zenburn-bg+2"  . "#3F3F3F")
 ;;     ("hc-zenburn-bg+3"  . "#4F4F4F")))
 (load-theme 'hc-zenburn t)
+
+;; Start eshell or switch to it if it's active.
+(global-set-key (kbd "C-x m") 'eshell)
+
+;; Start a new eshell even if one is active.
+(global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
+
+;; Start a regular shell if you prefer that.
+(global-set-key (kbd "C-x M-m") 'shell)
+
+;; cycle through buffers
+(global-set-key (kbd "C-]") 'bury-buffer)
 
 ;; Emacs server
 (use-package server)
