@@ -28,6 +28,12 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+
+
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -49,7 +55,7 @@
 (key-chord-mode 1)
 ;;
 ;; Max time delay between two key presses to be considered a key chord
-(setq key-chord-two-keys-delay 0.15) ; default 0.1
+(setq key-chord-two-keys-delay 0.1) ; default 0.1
 ;;
 ;; Max time delay between two presses of the same key to be considered a key chord.
 ;; Should normally be a little longer than `key-chord-two-keys-delay'.
@@ -78,6 +84,8 @@
 
 (use-package flycheck)
 (global-flycheck-mode)
+(with-eval-after-load 'flycheck
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 ;; better window management with winner and windmove
 
@@ -191,7 +199,14 @@
 
 ;; Default setup of smartparens
 (use-package smartparens)
-(require 'smartparens-config)
+(use-package smartparens-config
+    :ensure smartparens
+    :config
+    (progn
+      (show-smartparens-global-mode t)))
+
+(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+(add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
 (add-hook 'cc-mode-hook #'smartparens-mode)
 
 ;; undo-tree: turn on everywhere
@@ -309,6 +324,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Expand region (increases selected region by semantic units)
 (use-package expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
+(key-chord-define-global ";e" 'er/expand-region)
 
 ;;
 ;; ace jump mode major function
@@ -338,6 +354,8 @@ Including indent-buffer, which should not be called automatically on save."
 ;;If you use evil
 ;;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
+
+
 (key-chord-define-global "jw" 'ace-jump-word-mode)
 (key-chord-define-global "jc" 'ace-jump-char-mode)
 (key-chord-define-global "jl" 'ace-jump-line-mode)
@@ -353,11 +371,43 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Set up some more key chord bindings
 ;;
 ;;
-(key-chord-define-global ";r" 'query-replace-string)
+(key-chord-define-global ";w" 'other-window)
+(key-chord-define-global ";r" 'query-replace-regexp)
 (key-chord-define-global ";m" 'call-last-kbd-macro)
 (key-chord-define-global ";g" 'magit-status)
 (key-chord-define-global "xx" 'execute-extended-command)
 (key-chord-define-global "yy" 'browse-kill-ring)
+(key-chord-define-global ";b" 'ido-switch-buffer)
+(key-chord-define-global ";f" 'ido-find-file)
+(key-chord-define-global ";s" 'save-buffer)
+;;
+;; park these here until I can get to checking them out
+(key-chord-define-global "9f" 'projectile-find-file) ; F == File
+(key-chord-define-global "9w" 'save-buffer) ; W == Write
+(key-chord-define-global "3j" 'avy-goto-subword-1) ; J == Jump
+(key-chord-define-global "9r" 'anzu-query-replace-regexp) ; R == Replace
+(key-chord-define-global "9t" 'delete-trailing-whitespace) ; T == Trailing
+(key-chord-define-global "3u" 'undo-tree-visualize) ; U == Undo
+
+;; bigrams for future key chords
+;; qf
+;; qj
+;; qk
+;; qp
+;; qt
+;; qv
+;; qw
+;; qy
+;;     fb
+;;     gb gp
+;; jj  jc jf jg jh jk jl jm jp jq js jt jv jw jx jy jz
+;; kk
+;; qq  qb qf qg qh qk ql qm qp qt qv qw qx qy qz
+;; vv  vc vf vg vh vk vm vp vw vz
+;; ww
+;;     xb xd xg xk xm xs xw
+;; yy
+;;     zb zd zf zg zk zm zp zs zw zx
 
 (use-package hc-zenburn-theme)
 ;; Theme
@@ -389,3 +439,49 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(put 'downcase-region 'disabled nil)
 ;;(put 'upcase-region 'disabled nil)
 ;;(put 'narrow-to-region 'disabled nil)
+
+;;
+
+;;(setq key-chord-two-keys-delay .015
+;;      key-chord-one-key-delay .020)
+
+;; (dolist (binding
+;;          `((" i" . previous-multiframe-window)
+;;            (" o" . next-multiframe-window)
+;;            (" l" . ibuffer)
+
+;;            (" m" . magit)
+
+;;            (" e" . er/expand-region)
+
+;;            (" q" . quake-mode)
+
+;;            (" 0" . delete-window)
+;;            (" 1" . delete-other-windows)
+;;            (" 2" . split-window-below)
+;;            (" 3" . split-window-right)
+;;            (" =" . winstack-push)
+;;            (" -" . winstack-pop)
+
+;;            (" w" . whitespace-mode)
+
+;;            ("ji" . undo-tree-undo)
+;;            ("jo" . undo-tree-redo)
+;;            ("jk" . undo-tree-switch-branch)
+;;            ("j;" . undo-tree-visualize)
+
+;;            (" b" . ido-switch-buffer)
+;;            (" f" . ido-find-file)
+;;            (" s" . save-buffer)
+
+;;            (" x" . shell)
+
+;;            (" \\". jorbi/toggle-comment)
+
+;;            ("nw" . jabber-display-roster)
+;;            ("ne" . jabber-chat-with)
+
+;;            ("nv" . jorbi/find-init-file)
+
+;;            (" r" . recompile)))
+;;   (key-chord-define jordon-dev-mode-map (car binding) (cdr binding)))
