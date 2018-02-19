@@ -400,6 +400,34 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global ";b" 'ido-switch-buffer)
 (key-chord-define-global ";f" 'ido-find-file)
 (key-chord-define-global ";s" 'save-buffer)
+;;
+;; park these here until I can get to checking them out
+(key-chord-define-global "9f" 'projectile-find-file) ; F == File
+(key-chord-define-global "9w" 'save-buffer) ; W == Write
+(key-chord-define-global "3j" 'avy-goto-subword-1) ; J == Jump
+(key-chord-define-global "9r" 'anzu-query-replace-regexp) ; R == Replace
+(key-chord-define-global "9t" 'delete-trailing-whitespace) ; T == Trailing
+(key-chord-define-global "3u" 'undo-tree-visualize) ; U == Undo
+
+;; bigrams for future key chords
+;; qf
+;; qj
+;; qk
+;; qp
+;; qt
+;; qv
+;; qw
+;; qy
+;;     fb
+;;     gb gp
+;; jj  jc jf jg jh jk jl jm jp jq js jt jv jw jx jy jz
+;; kk
+;; qq  qb qf qg qh qk ql qm qp qt qv qw qx qy qz
+;; vv  vc vf vg vh vk vm vp vw vz
+;; ww
+;;     xb xd xg xk xm xs xw
+;; yy
+;;     zb zd zf zg zk zm zp zs zw zx
 
 (use-package hc-zenburn-theme)
 ;; Theme
