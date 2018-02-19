@@ -97,25 +97,18 @@
 ;;
 
 (use-package yasnippet)
-
-;;(yas-reload-all)
-;;(add-hook 'prog-mode-hook #'yas-minor-mode)
+(use-package yasnippet-snippets)
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
 
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"                 ;; personal snippets
-        ))
-
-;;(setq yas-snippet-dirs
-;;      '("~/.emacs.d/snippets"                 ;; personal snippets
 ;;        "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
 ;;       "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-;;        ))
+        ))
 
-;; yasnippet collections
-(use-package yasnippet-snippets)
-
-(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
-
+;; or M-x yas-reload-all if you've started YASnippet already.
+(yas-global-mode 1)
 ;;
 ;; Stuff cribbed from Magnars
 ;;
@@ -160,6 +153,7 @@
 (global-set-key (kbd "C-.") 'hippie-expand-no-case-fold)
 (global-set-key (kbd "C-:") 'hippie-expand-lines)
 (global-set-key (kbd "C-,") 'completion-at-point)
+(bind-key "M-/" 'hippie-expand)
 
 ;; cc-mode
 (require 'cc-mode)
