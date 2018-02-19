@@ -45,7 +45,7 @@
 (use-package bind-key)
 
 (use-package key-chord)
-](use-package use-package-chords)
+(use-package use-package-chords)
 (key-chord-mode 1)
 ;;
 ;; Max time delay between two key presses to be considered a key chord
@@ -381,6 +381,7 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global "xx" 'execute-extended-command)
 (key-chord-define-global "yy" 'browse-kill-ring)
 
+(use-package hc-zenburn-theme)
 ;; Theme
 ;; (defvar hc-zenburn-override-colors-alist
 ;;   '(("hc-zenburn-bg+05" . "#282828")
@@ -388,7 +389,6 @@ Including indent-buffer, which should not be called automatically on save."
 ;;     ("hc-zenburn-bg+2"  . "#3F3F3F")
 ;;     ("hc-zenburn-bg+3"  . "#4F4F4F")))
 (load-theme 'hc-zenburn t)
-
 
 ;; Emacs server
 (use-package server)
