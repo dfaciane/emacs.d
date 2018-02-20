@@ -206,11 +206,10 @@
 ;; undo-tree: turn on everywhere
 (use-package undo-tree)
 (global-undo-tree-mode 1)
-;; make ctrl-z undo
-;;(global-set-key (kbd "C-z") 'undo)
-;; make ctrl-Z redo
-;;(defalias 'redo 'undo-tree-redo)
-;;(global-set-key (kbd "C-S-z") 'redo)
+(key-chord-define-global "uv" 'undo-tree-visualize)
+(key-chord-define-global "uu" 'undo-tree-undo)
+(key-chord-define-global "ur" 'undo-tree-undo)
+(key-chord-define-global "ub" 'undo-tree-switch-branch)
 
 ;; Browse kill ring
 (use-package browse-kill-ring)
@@ -348,8 +347,6 @@ Including indent-buffer, which should not be called automatically on save."
 ;;If you use evil
 ;;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
-
-
 (key-chord-define-global "jw" 'ace-jump-word-mode)
 (key-chord-define-global "jc" 'ace-jump-char-mode)
 (key-chord-define-global "jl" 'ace-jump-line-mode)
@@ -374,14 +371,14 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global ";b" 'ido-switch-buffer)
 (key-chord-define-global ";f" 'ido-find-file)
 (key-chord-define-global ";s" 'save-buffer)
-;;
-;; park these here until I can get to checking them out
-(key-chord-define-global "9f" 'projectile-find-file) ; F == File
-(key-chord-define-global "9w" 'save-buffer) ; W == Write
-(key-chord-define-global "3j" 'avy-goto-subword-1) ; J == Jump
-(key-chord-define-global "9r" 'anzu-query-replace-regexp) ; R == Replace
-(key-chord-define-global "9t" 'delete-trailing-whitespace) ; T == Trailing
-(key-chord-define-global "3u" 'undo-tree-visualize) ; U == Undo
+(key-chord-define-global "9t" 'delete-trailing-whitespace)
+(key-chord-define-global ";y" 'monky-status)
+(key-chord-define-global ";c" 'comment-dwim)
+
+;; (require 'python)
+;; (key-chord-define python-mode-map ";d" 'python-insert-breakpoint)
+;; (key-chord-define-global ";x" 'execute-extended-command) ;; Meta-X
+
 
 ;; bigrams for future key chords
 ;; qf
@@ -402,6 +399,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;;     xb xd xg xk xm xs xw
 ;; yy
 ;;     zb zd zf zg zk zm zp zs zw zx
+
 
 (use-package hc-zenburn-theme)
 ;; Theme
@@ -433,49 +431,3 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(put 'downcase-region 'disabled nil)
 ;;(put 'upcase-region 'disabled nil)
 ;;(put 'narrow-to-region 'disabled nil)
-
-;;
-
-;;(setq key-chord-two-keys-delay .015
-;;      key-chord-one-key-delay .020)
-
-;; (dolist (binding
-;;          `((" i" . previous-multiframe-window)
-;;            (" o" . next-multiframe-window)
-;;            (" l" . ibuffer)
-
-;;            (" m" . magit)
-
-;;            (" e" . er/expand-region)
-
-;;            (" q" . quake-mode)
-
-;;            (" 0" . delete-window)
-;;            (" 1" . delete-other-windows)
-;;            (" 2" . split-window-below)
-;;            (" 3" . split-window-right)
-;;            (" =" . winstack-push)
-;;            (" -" . winstack-pop)
-
-;;            (" w" . whitespace-mode)
-
-;;            ("ji" . undo-tree-undo)
-;;            ("jo" . undo-tree-redo)
-;;            ("jk" . undo-tree-switch-branch)
-;;            ("j;" . undo-tree-visualize)
-
-;;            (" b" . ido-switch-buffer)
-;;            (" f" . ido-find-file)
-;;            (" s" . save-buffer)
-
-;;            (" x" . shell)
-
-;;            (" \\". jorbi/toggle-comment)
-
-;;            ("nw" . jabber-display-roster)
-;;            ("ne" . jabber-chat-with)
-
-;;            ("nv" . jorbi/find-init-file)
-
-;;            (" r" . recompile)))
-;;   (key-chord-define jordon-dev-mode-map (car binding) (cdr binding)))
