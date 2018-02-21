@@ -206,10 +206,10 @@
 ;; undo-tree: turn on everywhere
 (use-package undo-tree)
 (global-undo-tree-mode 1)
-(key-chord-define-global "uv" 'undo-tree-visualize)
-(key-chord-define-global "uu" 'undo-tree-undo)
-(key-chord-define-global "ur" 'undo-tree-undo)
-(key-chord-define-global "ub" 'undo-tree-switch-branch)
+(key-chord-define-global "'v" 'undo-tree-visualize)
+(key-chord-define-global "'u" 'undo-tree-undo)
+(key-chord-define-global "'r" 'undo-tree-undo)
+(key-chord-define-global "'b" 'undo-tree-switch-branch)
 
 ;; Browse kill ring
 (use-package browse-kill-ring)
@@ -362,18 +362,20 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Set up some more key chord bindings
 ;;
 ;;
-(key-chord-define-global ";w" 'other-window)
-(key-chord-define-global ";r" 'query-replace-regexp)
-(key-chord-define-global ";m" 'call-last-kbd-macro)
-(key-chord-define-global ";g" 'magit-status)
 (key-chord-define-global "xx" 'execute-extended-command)
-(key-chord-define-global "yy" 'browse-kill-ring)
+
 (key-chord-define-global ";b" 'ido-switch-buffer)
-(key-chord-define-global ";f" 'ido-find-file)
-(key-chord-define-global ";s" 'save-buffer)
-(key-chord-define-global "9t" 'delete-trailing-whitespace)
-(key-chord-define-global ";y" 'monky-status)
 (key-chord-define-global ";c" 'comment-dwim)
+(key-chord-define-global ";f" 'ido-find-file)
+(key-chord-define-global ";g" 'magit-status)
+(key-chord-define-global ";m" 'call-last-kbd-macro)
+(key-chord-define-global ";r" 'query-replace-regexp)
+(key-chord-define-global ";s" 'save-buffer)
+(key-chord-define-global ";t" 'delete-trailing-whitespace)
+(key-chord-define-global ";w" 'other-window)
+(key-chord-define-global ";x" 'execute-extended-command)
+(key-chord-define-global ";y" 'monky-status)
+(key-chord-define-global ";z" 'browse-kill-ring)
 
 ;; (require 'python)
 ;; (key-chord-define python-mode-map ";d" 'python-insert-breakpoint)
