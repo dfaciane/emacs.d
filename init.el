@@ -1,5 +1,16 @@
 ;; init.el
 ;;
+
+;; UTF-8 everywhere
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+
+;; Garbage-collect on focus-out, Emacs should feel snappier.
+(add-hook 'focus-out-hook #'garbage-collect)
+
 (require 'package)
 (setq package-enable-at-startup nil)
 ;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
@@ -43,6 +54,10 @@
 
 (eval-when-compile
   (require 'use-package))
+
+(use-package unicode-fonts)
+(unicode-fonts-setup)
+
 
 (use-package which-key
   :config (which-key-mode)
@@ -155,7 +170,15 @@
 (global-set-key (kbd "C-,") 'completion-at-point)
 (bind-key "M-/" 'hippie-expand)
 
-;; cc-mode
+;; c/c++ stuff
+(use-package rtags)
+  ;; 'irony
+  ;; 'irony-eldoc
+  ;; 'flycheck
+  ;; 'company-clang
+(use-package cmake-ide)
+;; tabs for indent, spaces to
+;;(use-package smart-tabs-mode)
 (require 'cc-mode)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -175,7 +198,7 @@
 
   (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
   (setq tab-width 4)
-  (setq indent-tabs-mode t)  ; use spaces only if nil
+  (setq indent-tabs-mode nil)  ; use spaces only if nil
   )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
