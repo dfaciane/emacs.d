@@ -325,8 +325,8 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
 ;; running emacs in daemon mode so don't need these
-(global-unset-key (kbd "C-x C-c"))
-(global-unset-key (kbd "C-x C-z"))
+;;(global-unset-key (kbd "C-x C-c"))
+;;(global-unset-key (kbd "C-x C-z"))
 
 
 ;;  Steve Yegge "effective emacs"
