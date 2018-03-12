@@ -376,7 +376,7 @@ Including indent-buffer, which should not be called automatically on save."
 
 (key-chord-define-global "jw" 'ace-jump-word-mode)
 (key-chord-define-global "jc" 'ace-jump-char-mode)
-(key-chord-define-global "jl" 'ace-jump-line-mode)
+(key-chord-define-global "jx" 'ace-jump-line-mode)
 (key-chord-define-global "JJ" 'ace-jump-mode-pop-mark)
 
 (use-package ace-jump-zap
