@@ -328,7 +328,6 @@ Including indent-buffer, which should not be called automatically on save."
 ;;global-unset-key(global-unset-key (kbd "C-x C-c"))
 ;;(global-unset-key (kbd "C-x C-z"))
 
-
 ;;  Steve Yegge "effective emacs"
 ;;
 ;;
