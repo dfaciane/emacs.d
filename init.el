@@ -102,8 +102,8 @@
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
-(use-package projectile)
-(projectile-mode)
+;(use-package projectile)
+;(projectile-mode)
 
 ;; better window management with winner and windmove
 
@@ -325,8 +325,8 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
 ;; running emacs in daemon mode so don't need these
-(global-unset-key (kbd "C-x C-c"))
-(global-unset-key (kbd "C-x C-z"))
+;;global-unset-key(global-unset-key (kbd "C-x C-c"))
+;;(global-unset-key (kbd "C-x C-z"))
 
 
 ;;  Steve Yegge "effective emacs"
