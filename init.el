@@ -8,8 +8,6 @@
 (set-keyboard-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
-(setq tramp-default-method "ssh")
-
 ;; Garbage-collect on focus-out, Emacs should feel snappier.
 (add-hook 'focus-out-hook #'garbage-collect)
 
@@ -24,6 +22,11 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
+
+;; rebind keys (not sure I like these)
+;;(setq mac-command-modifier 'meta)
+;;(setq mac-option-modifier 'super)
+;;(setq ns-function-modifier 'hyper)
 
 ;; load path
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
@@ -174,6 +177,33 @@
 (global-set-key (kbd "C-:") 'hippie-expand-lines)
 (global-set-key (kbd "C-,") 'completion-at-point)
 (bind-key "M-/" 'hippie-expand)
+
+;; join the current line and the next one
+(global-set-key (kbd "M-j")
+            (lambda ()
+                  (interactive)
+                  (join-line -1)))
+
+;; Move more quickly
+(global-set-key (kbd "C-S-n")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (next-line 5))))
+
+(global-set-key (kbd "C-S-p")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (previous-line 5))))
+
+(global-set-key (kbd "C-S-f")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (forward-char 5))))
+
+(global-set-key (kbd "C-S-b")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (backward-char 5))))
 
 ;; c/c++ stuff
 ;;(use-package rtags)
