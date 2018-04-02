@@ -8,6 +8,8 @@
 (set-keyboard-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
+(setq tramp-default-method "ssh")
+
 ;; Garbage-collect on focus-out, Emacs should feel snappier.
 (add-hook 'focus-out-hook #'garbage-collect)
 
