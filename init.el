@@ -482,6 +482,10 @@ Including indent-buffer, which should not be called automatically on save."
 ;; cycle through buffers
 (global-set-key (kbd "C-]") 'bury-buffer)
 
+;; tramp mode
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
+
 ;; Emacs server
 ;;(use-package server)
 ;;(unless (server-running-p)
