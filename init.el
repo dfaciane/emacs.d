@@ -6,7 +6,7 @@
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8)
+(setq buffer-file-coding-system 'utf-8)
 
 ;; Garbage-collect on focus-out, Emacs should feel snappier.
 (add-hook 'focus-out-hook #'garbage-collect)
@@ -481,6 +481,23 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; cycle through buffers
 (global-set-key (kbd "C-]") 'bury-buffer)
+
+; Plan 9-ish smart shell
+(require 'eshell)
+(require 'em-smart)
+(setq eshell-where-to-jump 'begin)
+(setq eshell-review-quick-commands nil)
+(setq eshell-smart-space-goes-to-end t)
+
+
+(defun my/list-shells ()
+  (interactive)
+  (ibuffer nil "*Ibuffer - shells*" '((or (derived-mode . shell-mode)
+                                          (derived-mode . eshell-mode)))))
+
+;; use ibuffer instead of regular buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 
 ;; Emacs server
 ;;(use-package server)
