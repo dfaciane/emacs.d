@@ -180,6 +180,9 @@
 
 ;; multiple cursors
 (use-package multiple-cursors)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-c m c") 'mc/edit-lines)
 
 ;; join the current line and the next one
@@ -337,6 +340,16 @@
 ;; Also auto refresh dired, but be quiet about it
 (setq global-auto-revert-non-file-buffers t)
 (setq auto-revert-verbose nil)
+
+;; dired sort menu
+(use-package dired-quick-sort
+  :ensure t
+  :config
+  (dired-quick-sort-setup))
+
+;; allow editing file permissions in wdired
+(setq wdired-allow-to-change-permissions t)
+
 
 ;; magnars
 (defun cleanup-buffer-safe ()
@@ -576,3 +589,10 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(put 'downcase-region 'disabled nil)
 ;;(put 'upcase-region 'disabled nil)
 ;;(put 'narrow-to-region 'disabled nil)
+
+;; Fonts
+;;(set-frame-font "DejaVu Sans Mono-14" nil t)
+;;(set-frame-font "Fantasque Sans Mono-16" nil t)
+;;(set-frame-font "Source Code Pro-14" nil t)
+;;(set-frame-font "Monaco-14" nil t)
+;;(set-frame-font "Cousine-14" nil t)
