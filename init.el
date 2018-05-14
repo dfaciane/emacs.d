@@ -498,7 +498,15 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; tramp mode
-(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+(require 'tramp)
+(add-to-list 'tramp-remote-path "/home/dfaciane/bin")
+(add-to-list 'tramp-remote-path 'tramp-default-remote-path)
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+;;(push "/home/dfaciane/bin/" tramp-remote-path)
+
+
+
+;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 ;; Emacs server
 ;;(use-package server)
