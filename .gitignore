@@ -39,6 +39,9 @@ dist/
 # Flycheck
 flycheck_*.el
 
+# custom config
+custom.el
+
 # server auth directory
 /server/
 
@@ -71,15 +74,3 @@ site-lisp/adventur-mode
 /history
 /ido.last
 /recentf
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
