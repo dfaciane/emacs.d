@@ -482,13 +482,12 @@ Including indent-buffer, which should not be called automatically on save."
 ;; cycle through buffers
 (global-set-key (kbd "C-]") 'bury-buffer)
 
-; Plan 9-ish smart shell
+;; Plan 9-ish smart shell
 (require 'eshell)
 (require 'em-smart)
 (setq eshell-where-to-jump 'begin)
 (setq eshell-review-quick-commands nil)
 (setq eshell-smart-space-goes-to-end t)
-
 
 (defun my/list-shells ()
   (interactive)
@@ -498,6 +497,8 @@ Including indent-buffer, which should not be called automatically on save."
 ;; use ibuffer instead of regular buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; tramp mode
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 ;; Emacs server
 ;;(use-package server)
