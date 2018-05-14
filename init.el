@@ -337,6 +337,13 @@
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 
+;; kill current buffer instead of popping buffer menu
+(defun kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
 ;; Also auto refresh dired, but be quiet about it
 (setq global-auto-revert-non-file-buffers t)
 (setq auto-revert-verbose nil)
@@ -523,9 +530,6 @@ Including indent-buffer, which should not be called automatically on save."
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 ;; eww web browser
-(setq browse-url-browser-function 'eww-browse-url)
-(global-set-key (kbd "C-c b") 'browse-url-at-point)
-
 (use-package eww
   :defer t
   :init
@@ -560,17 +564,21 @@ Including indent-buffer, which should not be called automatically on save."
     (bind-key "f" #'eww-lnum-follow eww-mode-map)
     (bind-key "U" #'eww-lnum-universal eww-mode-map)))
 
+(setq browse-url-browser-function 'eww-browse-url)
+(global-set-key (kbd "C-c b") 'browse-url-at-point)
+
+
 ;;(use-package link-hint
 ;;  :ensure t
 ;;  :bind ("C-c f" . link-hint-open-link))
 
 ;; search backwards, prompting to open any URL found.
-(defun browse-last-url-in-brower ()
-  (interactive)
-  (save-excursion
-    (ffap-next-url t t)))
+;;(defun browse-last-url-in-brower ()
+;;  (interactive)
+;;  (save-excursion
+;;    (ffap-next-url t t)))
 
-(global-set-key (kbd "C-c u") 'browse-last-url-in-brower)
+;;(global-set-key (kbd "C-c u") 'browse-last-url-in-brower)
 
 ;; render the current buffer as html and display
 (defun eww-render-current-buffer ()
@@ -596,3 +604,5 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(set-frame-font "Source Code Pro-14" nil t)
 ;;(set-frame-font "Monaco-14" nil t)
 ;;(set-frame-font "Cousine-14" nil t)
+;;
+;;
