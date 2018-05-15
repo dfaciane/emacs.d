@@ -137,14 +137,9 @@
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"                 ;; personal snippets
-;;        "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-;;       "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-        ))
+;; (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
 
-;; or M-x yas-reload-all if you've started YASnippet already.
-(yas-global-mode 1)
 ;;
 ;; Stuff cribbed from Magnars
 ;;
