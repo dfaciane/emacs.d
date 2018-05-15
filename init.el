@@ -49,6 +49,14 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
+;;keep cursor at same position when scrolling
+(setq scroll-preserve-screen-position 1)
+;;scroll window up/down by one line
+(global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
+(global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+
+;; read only mode
+;; (setq view-read-only t)
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -99,6 +107,11 @@
 ;; (use-package miniedit
 ;;   :commands minibuffer-edit
 ;;   :init (miniedit-install))
+
+;; volatile highlights - temporarily highlight changes from pasting etc
+(use-package volatile-highlights
+  :config
+  (volatile-highlights-mode t))
 
 (use-package dash)
 
@@ -348,6 +361,9 @@
 (setq global-auto-revert-non-file-buffers t)
 (setq auto-revert-verbose nil)
 
+;;Use dired-jump, (which is bound to C-x C-j) to show the current file in a dired buffer.
+(require 'dired-x)
+
 ;; dired sort menu
 (use-package dired-quick-sort
   :ensure t
@@ -357,6 +373,11 @@
 ;; allow editing file permissions in wdired
 (setq wdired-allow-to-change-permissions t)
 
+;;narrow dired to match filter
+(use-package dired-narrow
+  :ensure t
+  :bind (:map dired-mode-map
+              ("/" . dired-narrow)))
 
 ;; magnars
 (defun cleanup-buffer-safe ()
@@ -379,6 +400,9 @@ Including indent-buffer, which should not be called automatically on save."
   (indent-region (point-min) (point-max)))
 
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
+
+;; delete blank lines and whitespace interactively
+(global-set-key (kbd "M-SPC") 'shrink-whitespace)
 
 ;; running emacs in daemon mode so don't need these
 ;;global-unset-key(global-unset-key (kbd "C-x C-c"))
@@ -483,6 +507,14 @@ Including indent-buffer, which should not be called automatically on save."
 ;;     xb xd xg xk xm xs xw
 ;; yy
 ;;     zb zd zf zg zk zm zp zs zw zx
+
+;; use hunspell
+(setq-default ispell-program-name "hunspell")
+(setq ispell-really-hunspell t)
+
+;; tell ispell that apostrophes are part of words
+(setq ispell-local-dictionary-alist
+      `((nil "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_US") nil utf-8)))
 
 
 (use-package hc-zenburn-theme)
