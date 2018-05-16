@@ -11,6 +11,9 @@ ac-comphist.dat
 projectile-bookmarks.eld
 smex-items
 
+# erc
+.erc-auth
+
 # Org-mode
 .org-id-locations
 *_archive
