@@ -527,8 +527,8 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Start a new eshell even if one is active.
 (global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
 
-;; Start a regular shell if you prefer that.
-(global-set-key (kbd "C-x M-m") 'shell)
+;; Start a terminal if you prefer that.
+(global-set-key (kbd "C-x M-m") 'ansi-term)
 
 ;; cycle through buffers
 (global-set-key (kbd "C-]") 'bury-buffer)
