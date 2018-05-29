@@ -15,8 +15,8 @@
 (setq package-enable-at-startup nil)
 ;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 
 (package-initialize)
 
@@ -662,7 +662,7 @@ Including indent-buffer, which should not be called automatically on save."
      ;;; Options
 
 ;; Join the #emacs and #erc channels whenever connecting to Freenode.
-(setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#erc")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#erc" "#python")))
 
 ;; Rename server buffers to reflect the current network name instead
 ;; of SERVER:PORT (e.g., "freenode" instead of "irc.freenode.net:6667").
