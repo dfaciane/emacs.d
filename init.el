@@ -102,6 +102,8 @@
 (when is-mac
   (use-package exec-path-from-shell)
   (exec-path-from-shell-initialize))
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+
 
 ;; more space in minibuffer
 ;; (use-package miniedit
