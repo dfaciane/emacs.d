@@ -457,13 +457,13 @@ Including indent-buffer, which should not be called automatically on save."
   :chords ("jz" . ace-jump-zap-up-to-char))
 
 ;; dired stuff
-(use-package dired-details)
+;;(use-package dired-details)
 (setq-default dired-listing-switches "-alhv")
 
 ;; Set up some more key chord bindings
 ;;
 ;;
-(key-chord-define-global "xx" 'execute-extended-command)
+;;(key-chord-define-global "xx" 'execute-extended-command)
 
 (key-chord-define-global ";b" 'ido-switch-buffer)
 (key-chord-define-global ";c" 'comment-dwim)
@@ -478,9 +478,10 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global ";y" 'monky-status)
 (key-chord-define-global ";z" 'browse-kill-ring)
 
-;; (require 'python)
-;; (key-chord-define python-mode-map ";d" 'python-insert-breakpoint)
-;; (key-chord-define-global ";x" 'execute-extended-command) ;; Meta-X
+(require 'python)
+(key-chord-define python-mode-map ";d" 'python-insert-breakpoint)
+(add-hook 'python-mode-hook '(lambda ()
+ (setq python-indent 4)))
 
 
 ;; bigrams for future key chords
