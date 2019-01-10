@@ -376,6 +376,12 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
+
+
 ;; magnars
 (defun cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
@@ -459,8 +465,8 @@ Including indent-buffer, which should not be called automatically on save."
   :chords ("jz" . ace-jump-zap-up-to-char))
 
 ;; dired stuff
-(use-package dired-details)
-(setq-default dired-listing-switches "-alhv")
+;; (use-package dired-details)
+;; (setq-default dired-listing-switches "-alhv")
 
 ;; Set up some more key chord bindings
 ;;
