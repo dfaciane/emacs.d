@@ -551,10 +551,13 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; tramp mode
-(require 'tramp)
+;;(require 'tramp)
+(setq tramp-default-method "ssh")
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
 ;;(add-to-list 'tramp-remote-path "/home/dfaciane/bin")
 ;;(add-to-list 'tramp-remote-path 'tramp-default-remote-path)
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 ;;(push "/home/dfaciane/bin/" tramp-remote-path)
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
@@ -693,7 +696,6 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; Run at full power please
 ;;(put 'downcase-region 'disabled nil)
-;;(put 'upcase-region 'disabled nil)
 ;;(put 'narrow-to-region 'disabled nil)
 
 ;; Fonts
@@ -704,3 +706,4 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(set-frame-font "Cousine-14" nil t)
 ;;
 ;;
+(put 'upcase-region 'disabled nil)
