@@ -376,11 +376,6 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
-
 
 ;; magnars
 (defun cleanup-buffer-safe ()
