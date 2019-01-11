@@ -102,6 +102,8 @@
 (when is-mac
   (use-package exec-path-from-shell)
   (exec-path-from-shell-initialize))
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+
 
 ;; more space in minibuffer
 ;; (use-package miniedit
@@ -374,6 +376,12 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
+
+
 ;; magnars
 (defun cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
@@ -457,8 +465,8 @@ Including indent-buffer, which should not be called automatically on save."
   :chords ("jz" . ace-jump-zap-up-to-char))
 
 ;; dired stuff
-;;(use-package dired-details)
-(setq-default dired-listing-switches "-alhv")
+;; (use-package dired-details)
+;; (setq-default dired-listing-switches "-alhv")
 
 ;; Set up some more key chord bindings
 ;;
@@ -550,10 +558,13 @@ Including indent-buffer, which should not be called automatically on save."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; tramp mode
-(require 'tramp)
+;;(require 'tramp)
+(setq tramp-default-method "ssh")
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
 ;;(add-to-list 'tramp-remote-path "/home/dfaciane/bin")
 ;;(add-to-list 'tramp-remote-path 'tramp-default-remote-path)
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 ;;(push "/home/dfaciane/bin/" tramp-remote-path)
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
@@ -692,7 +703,6 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; Run at full power please
 ;;(put 'downcase-region 'disabled nil)
-;;(put 'upcase-region 'disabled nil)
 ;;(put 'narrow-to-region 'disabled nil)
 
 ;; Fonts
@@ -703,3 +713,4 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(set-frame-font "Cousine-14" nil t)
 ;;
 ;;
+(put 'upcase-region 'disabled nil)
