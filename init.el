@@ -558,11 +558,14 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; tramp mode
 (require 'tramp)
-;;(add-to-list 'tramp-remote-path "/home/dfaciane/bin")
-;;(add-to-list 'tramp-remote-path 'tramp-default-remote-path)
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+(setq tramp-default-method "scp")
+(customize-set-variable 'tramp-default-user "dfaciane")
+(customize-set-variable 'tramp-default-host "centos")
+;(add-to-list 'tramp-remote-path "/home/dfaciane/bin")
+;(add-to-list 'tramp-remote-path 'tramp-default-remote-path)
+;(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 ;;(push "/home/dfaciane/bin/" tramp-remote-path)
-;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 ;; eww web browser
 (use-package eww
@@ -699,7 +702,6 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; Run at full power please
 ;;(put 'downcase-region 'disabled nil)
-;;(put 'upcase-region 'disabled nil)
 ;;(put 'narrow-to-region 'disabled nil)
 
 ;; Fonts
@@ -710,3 +712,4 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(set-frame-font "Cousine-14" nil t)
 ;;
 ;;
+(put 'upcase-region 'disabled nil)
