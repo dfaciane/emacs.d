@@ -255,6 +255,19 @@
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
+
+;; coffeescript
+(use-package coffee-mode)
+(custom-set-variables
+ '(coffee-tab-width 2)
+ '(coffee-args-compile '("-c" "--no-header" "--bare")))
+
+(eval-after-load "coffee-mode"
+  '(progn
+     (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
+     (define-key coffee-mode-map (kbd "C-j") 'coffee-newline-and-indent)))
+
+
 ;; auto-indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
@@ -376,11 +389,6 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
-
 
 ;; magnars
 (defun cleanup-buffer-safe ()
@@ -471,7 +479,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Set up some more key chord bindings
 ;;
 ;;
-(key-chord-define-global "xx" 'execute-extended-command)
+;;(key-chord-define-global "xx" 'execute-extended-command)
 
 (key-chord-define-global ";b" 'ido-switch-buffer)
 (key-chord-define-global ";c" 'comment-dwim)
@@ -486,9 +494,10 @@ Including indent-buffer, which should not be called automatically on save."
 (key-chord-define-global ";y" 'monky-status)
 (key-chord-define-global ";z" 'browse-kill-ring)
 
-;; (require 'python)
-;; (key-chord-define python-mode-map ";d" 'python-insert-breakpoint)
-;; (key-chord-define-global ";x" 'execute-extended-command) ;; Meta-X
+(require 'python)
+(key-chord-define python-mode-map ";d" 'python-insert-breakpoint)
+(add-hook 'python-mode-hook '(lambda ()
+ (setq python-indent 4)))
 
 
 ;; bigrams for future key chords

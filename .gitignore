@@ -79,3 +79,5 @@ site-lisp/adventur-mode
 /recentf
 
 .mc-lists.el
+
+transient
