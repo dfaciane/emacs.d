@@ -12,6 +12,8 @@ ac-comphist.dat
 projectile-bookmarks.eld
 smex-items
 
+.cache
+
 # erc
 .erc-auth
 
