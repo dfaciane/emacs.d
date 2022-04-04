@@ -1,5 +1,9 @@
 ;; init.el
 ;;
+;; tool bars and menu bars are for losers
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; UTF-8 everywhere
 (prefer-coding-system 'utf-8)
@@ -54,6 +58,9 @@
 ;;scroll window up/down by one line
 (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
 (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+
+; repeat last keyboard macro
+(global-set-key [f5] 'call-last-kbd-macro)
 
 ;; read only mode
 ;; (setq view-read-only t)
