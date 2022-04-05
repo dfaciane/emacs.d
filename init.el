@@ -712,13 +712,13 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 ;; Emacs server
-;;(use-package server)
-;;(unless (server-running-p)
-;;  (server-start))
+(use-package server)
+(unless (server-running-p)
+  (server-start))
 
 ;; Run at full power please
-;;(put 'downcase-region 'disabled nil)
-;;(put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;; Fonts
 ;;(set-frame-font "DejaVu Sans Mono-14" nil t)
