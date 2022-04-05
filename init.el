@@ -34,6 +34,7 @@
 
 ;; load path
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 ;;(add-to-list 'load-path settings-dir)
 ;;(add-to-list 'load-path site-lisp-dir)
 
@@ -583,133 +584,11 @@ Including indent-buffer, which should not be called automatically on save."
 ;;(push "/home/dfaciane/bin/" tramp-remote-path)
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
-;; eww web browser
-(use-package eww
-  :defer t
-  :init
-  (setq browse-url-browser-function
-        '((".*google.*maps.*" . browse-url-generic)
-          ;; Github goes to firefox, but not gist
-          ("http.*\/\/github.com" . browse-url-generic)
-          ("groups.google.com" . browse-url-generic)
-          ("docs.google.com" . browse-url-generic)
-          ("melpa.org" . browse-url-generic)
-          ("stackoverflow\.com" . browse-url-generic)
-          ("t.co" . browse-url-generic)
-          ("twitter.com" . browse-url-generic)
-          ("youtube.com" . browse-url-generic)
-          ("amazon.com" . browse-url-generic)
-          ("slideshare.net" . browse-url-generic)
-          ("." . eww-browse-url)))
-  (setq shr-external-browser 'browse-url-generic)
-  (setq browse-url-generic-program (executable-find "chrome"))
-  (add-hook 'eww-mode-hook #'toggle-word-wrap)
-  (add-hook 'eww-mode-hook #'visual-line-mode)
-  :config
-  (use-package s :ensure t)
-  (define-key eww-mode-map "o" 'eww)
-  (define-key eww-mode-map "O" 'eww-browse-with-external-browser)
-  (define-key eww-mode-map "j" 'next-line)
-  (define-key eww-mode-map "k" 'previous-line)
 
-  (use-package eww-lnum
-    :ensure t
-    :config
-    (bind-key "f" #'eww-lnum-follow eww-mode-map)
-    (bind-key "U" #'eww-lnum-universal eww-mode-map)))
-
-(setq browse-url-browser-function 'eww-browse-url)
-(global-set-key (kbd "C-c b") 'browse-url-at-point)
-
-
-;;(use-package link-hint
-;;  :ensure t
-;;  :bind ("C-c f" . link-hint-open-link))
-
-;; search backwards, prompting to open any URL found.
-;;(defun browse-last-url-in-brower ()
-;;  (interactive)
-;;  (save-excursion
-;;    (ffap-next-url t t)))
-
-;;(global-set-key (kbd "C-c u") 'browse-last-url-in-brower)
-
-;; render the current buffer as html and display
-(defun eww-render-current-buffer ()
-  "Render HTML in the current buffer with EWW"
-  (interactive)
-  (beginning-of-buffer)
-  (eww-display-html 'utf8 (buffer-name)))
-
-;; ERC configuration
-
-;; Load authentication info from an external source.  Put sensitive
-;; passwords and the like in here.
-(load "~/.emacs.d/.erc-auth")
-
-;; This is an example of how to make a new command.  Type "/uptime" to
-;; use it.
-(defun erc-cmd-UPTIME (&rest ignore)
-  "Display the uptime of the system, as well as some load-related
-     stuff, to the current ERC buffer."
-  (let ((uname-output
-         (replace-regexp-in-string
-          ", load average: " "] {Load average} ["
-          ;; Collapse spaces, remove
-          (replace-regexp-in-string
-           " +" " "
-           ;; Remove beginning and trailing whitespace
-           (replace-regexp-in-string
-            "^ +\\|[ \n]+$" ""
-            (shell-command-to-string "uptime"))))))
-    (erc-send-message
-     (concat "{Uptime} [" uname-output "]"))))
-
-;; This causes ERC to connect to the Freenode network upon hitting
-;; C-c e f.
-(global-set-key "\C-cef" (lambda () (interactive)
-                           (erc :server "irc.freenode.net" :port "6667"
-                                :nick erc-nick :password erc-password)))
-
-;; This causes ERC to connect to the IRC server on your own machine (if
-;; you have one) upon hitting C-c e b.
-;; Often, people like to run bitlbee (http://bitlbee.org/) as an
-;; AIM/Jabber/MSN to IRC gateway, so that they can use ERC to chat with
-;; people on those networks.
-(global-set-key "\C-ceb" (lambda () (interactive)
-                           (erc :server "localhost" :port "6667"
-                                :nick erc-nick :password erc-password)))
-
-;; Make C-c RET (or C-c C-RET) send messages instead of RET.  This has
-;; been commented out to avoid confusing new users.
-;; (define-key erc-mode-map (kbd "RET") nil)
-;; (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
-;; (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
-
-     ;;; Options
-
-;; Join the #emacs and #erc channels whenever connecting to Freenode.
-(setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#erc" "#python")))
-
-;; Rename server buffers to reflect the current network name instead
-;; of SERVER:PORT (e.g., "freenode" instead of "irc.freenode.net:6667").
-;; This is useful when using a bouncer like ZNC where you have multiple
-;; connections to the same server.
-(setq erc-rename-buffers t)
-
-;; Interpret mIRC-style color commands in IRC chats
-(setq erc-interpret-mirc-color t)
-
-;; The following are commented out by default, but users of other
-;; non-Emacs IRC clients might find them useful.
-;; Kill buffers for channels after /part
-;; (setq erc-kill-buffer-on-part t)
-;; Kill buffers for private queries after quitting the server
-;; (setq erc-kill-queries-on-quit t)
-;; Kill buffers for server messages after quitting the server
-;; (setq erc-kill-server-buffer-on-quit t)
-
-
+;; load eww stuff if wanted
+;; (require 'init-eww)
+;; load erc stuff if wanted
+;; (require 'init-erc)
 
 ;; Emacs server
 (use-package server)
