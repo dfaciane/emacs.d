@@ -302,6 +302,8 @@
 ;; undo-tree: turn on everywhere
 (use-package undo-tree)
 (global-undo-tree-mode 1)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 (key-chord-define-global "'v" 'undo-tree-visualize)
 (key-chord-define-global "'u" 'undo-tree-undo)
 (key-chord-define-global "'r" 'undo-tree-undo)
