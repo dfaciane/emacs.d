@@ -309,6 +309,10 @@
 (key-chord-define-global "'r" 'undo-tree-undo)
 (key-chord-define-global "'b" 'undo-tree-switch-branch)
 
+(global-undo-tree-mode)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+
 ;; Browse kill ring
 (use-package browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
